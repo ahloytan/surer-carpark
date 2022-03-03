@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <link rel="stylesheet" type="text/css" href="./scripts/style.css">
+</head>
+
+<body>
+  <div class="container text-light mt-5">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <div class="row">
+      <div class="col-6">
+        <form action="/login" method="POST">
+          <h1>Login</h1>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input name="email" placeholder="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input name="password" placeholder="Password" type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+
+      <div class="col-6">
+        <h1>Registration</h1>
+        <form action="/register" method="POST">
+          <div class="mb-3">
+            <label for="exampleInputfName" class="form-label">First Name</label>
+            <input name="fname" type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon2">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputlName" class="form-label">Last Name</label>
+            <input name="lname" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon2">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail2" class="form-label">Email</label>
+            <input name="email2" placeholder="Email" type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword2" class="form-label">Password</label>
+            <input name="password2" placeholder="Password" type="password" class="form-control" id="exampleInputPassword2">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contact Number</label>
+            <input name="contact" placeholder="Contact Number" type="number" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- https://stackoverflow.com/questions/62044271/javascript-file-not-loading-in-flask-web-page -->
+  <link href="{{ url_for('static', filename='scripts/bootstrap.min.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='scripts/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

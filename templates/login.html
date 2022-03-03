@@ -1,0 +1,52 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Post-Login page</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <link rel="stylesheet" type="text/css" href="./scripts/style.css">
+</head>
+<body id="loginer">
+
+  <div class="container h-100 text-white d-flex align-items-center">
+    <div class="row ">
+      <div class="col">
+        <div>
+          {% for key, value in token.items() %}
+
+            <span>JWT Token:</span>
+            <p>{{value}}</p>
+
+          {% endfor %}
+        </div>
+        <div>
+          <form action="/changer" method="POST">
+            <label for="exampleInputfName" class="form-label">Copy & paste the above JWT Token!</label>
+            <div class="mb-3">
+              <input name="jwt" type="text" class="form-control" placeholder="JWT Token" aria-label="JWT Token" aria-describedby="basic-addon2">
+            </div>
+            <button type="submit" class="btn btn-primary">View Protect API Route</button>
+          </form>
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-primary">Log Out</button>
+          </form>
+        </div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <link href="{{ url_for('static', filename='scripts/bootstrap.min.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='scripts/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
